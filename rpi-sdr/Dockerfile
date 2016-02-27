@@ -3,15 +3,16 @@ FROM resin/rpi-raspbian:jessie
 MAINTAINER Michael J. Mitchell <michael@mitchtech.net>
 
 RUN apt-get update && apt-get install -y -q \
-    build-essential 
+    build-essential \
     cmake \
     git \
     libusb-1.0-0-dev \
     python \
     python-numpy \
-    python-pip 
+    python-pip
 
-RUN git clone git://git.osmocom.org/rtl-sdr.git && \
+RUN echo 'blacklist dvb_usb_rtl28xxu' > /etc/modprobe.d/raspi-blacklist.conf && \
+    git clone git://git.osmocom.org/rtl-sdr.git && \
     cd rtl-sdr && \
     mkdir build && \
     cd build && \
@@ -21,4 +22,3 @@ RUN git clone git://git.osmocom.org/rtl-sdr.git && \
     ldconfig
 
 RUN pip install pyrtlsdr
-
