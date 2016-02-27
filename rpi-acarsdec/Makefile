@@ -1,4 +1,4 @@
-CLFAGS= -Ofast -mfpu=neon-vfpv4 -funroll-loops -pthread -D WITH_RTL -I.
+CFLAGS= -Ofast -mfpu=neon-vfpv4 -funroll-loops -pthread -D WITH_RTL -I.
 LDLIBS= -lm -pthread  -lrtlsdr
 
 acarsdec:	acarsdec.o acars.o msk.o rtl.o air.o output.o alsa.o
