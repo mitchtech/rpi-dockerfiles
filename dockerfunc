@@ -133,7 +133,7 @@ rtl-ais(){
 }
 # gpio, wiringpi, pyserial
 wiringpi(){
-	docker run --rm it \
+	docker run --rm -it \
 	--cap-add SYS_RAWIO \
 	--device /dev/mem \
 	--name wiringpi \
