@@ -1,0 +1,86 @@
+#!/bin/bash
+# bash wrappers for docker run commands
+# refs: 
+# https://github.com/jfrazelle/dotfiles
+# https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
+
+
+
+#
+# container aliases
+# 
+# web-based gui for docker
+dockerui(){
+	del_stopped dockerui
+
+	docker run -d \
+	-p 9000:9000 \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	--name dockerui \
+	hypriot/rpi-dockerui
+}
+# gpio pin mode/state acess
+gpio(){
+	docker run --rm \
+	--cap-add SYS_RAWIO \
+	--device /dev/mem \
+	--name gpio \
+	mitchtech/rpi-gpio "$@"
+}
+# minimal busybox http server
+httpd(){
+	del_stopped httpd
+
+	docker run -d \
+	-p 80:80 \
+	--name httpd
+	mitchtech/rpi-busybox-httpd
+}
+
+
+#
+# support aliases
+#
+# kill all running containers
+alias docker-killall='docker kill $(docker ps -q)'
+
+# delete all stopped containers
+alias docker-cleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
+
+# delete all untagged images
+alias docker-cleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+
+# delete dangling volumes
+alias docker-cleanv='printf "\n>>> Deleting dangling volumes\n\n" && docker volume rm $(docker volume ls -qf dangling=true)'
+
+# delete stopped containers, untagged images
+alias docker-cleanall='dockercleanc || true && dockercleani || true && dockercleanv'
+
+# removes dangling and exited docker containers
+dcleanup(){
+	docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+	docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+# delete stopped container
+del_stopped(){
+	local name=$1
+	local state=$(docker inspect --format "{{.State.Running}}" $name 2>/dev/null)
+
+	if [[ "$state" == "false" ]]; then
+		docker rm $name
+	fi
+}
+# dependency on another running container
+relies_on(){
+	local containers=$@
+
+	for container in $containers; do
+		local state=$(docker inspect --format "{{.State.Running}}" $container 2>/dev/null)
+
+		if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+			echo "$container is not running, starting it for you."
+			$container
+		fi
+	done
+}
