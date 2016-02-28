@@ -15,7 +15,7 @@ acarsdec(){
 	docker run --rm -it \
 	--device=/dev/bus/usb \
 	--name acarsdec \
-	mitchtech/acarsdec -v -g 450 -r 0 130.025 131.550
+	mitchtech/rpi-acarsdec -v -g 450 -r 0 130.025 131.550
 }
 # adb, fastboot
 # android-tools(){}
@@ -40,7 +40,7 @@ dump1090(){
 	-p 8080:8080 \
 	--device=/dev/bus/usb \
 	--name dump1090 \
-	mitchtech/dump1090 
+	mitchtech/rpi-dump1090 
 }
 # frequency show visual spectrum analyzer
 freqshow(){
@@ -50,7 +50,7 @@ freqshow(){
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-e DISPLAY=172.17.42.1:0.0 \
 	--name freqshow \
-	mitchtech/freqshow 
+	mitchtech/rpi-freqshow 
 }
 # google talk (xmpp) bot
 # gtalkbot(){}
@@ -184,7 +184,7 @@ rtl-ais(){
 	docker run --rm -it \
 	--device=/dev/bus/usb \
 	--name rtl-ais \
-	mitchtech/rtl-ais
+	mitchtech/rpi-rtl-ais
 }
 # the onion router
 # tor(){}
