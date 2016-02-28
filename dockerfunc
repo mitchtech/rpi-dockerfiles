@@ -80,6 +80,30 @@ kitematic(){
 	--name kitematic \
 	mitchtech/rpi-kitematic
 }
+# kivy graphic info screen
+kivy-infoscreen(){
+	del_stopped kivy-infoscreen
+
+	docker run -d \
+	--privileged \
+	-e DISPLAY=172.17.42.1:0.0 \
+	--name kivy-infoscreen \
+	mitchtech/rpi-kivy-infoscreen
+}
+# webcam and motion detection server
+motion(){
+	del_stopped motion
+
+	docker run -d \
+	--restart always \
+	--device=/dev/bus/usb \
+	-p 8080:8080 \
+    -p 8081:8081 \
+#   -v ./motion.conf:/etc/motion/motion.conf
+    -v ./motion:/var/lib/motion
+	--name motion \
+	mitchtech/rpi-motion
+}
 # adafruit neopixel leds
 neopixel(){
 	del_stopped neopixel
