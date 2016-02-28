@@ -11,7 +11,9 @@ RUN apt-get update && apt-get install -y -q \
     m4 \
     protobuf-compiler \
     python \
-    wget
+    wget \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN wget http://download.rethinkdb.com/dist/rethinkdb-2.2.4.tgz && \
     tar -zxvf rethinkdb-2.2.4.tgz && \

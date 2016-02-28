@@ -22,5 +22,4 @@ WORKDIR /data
 
 ENTRYPOINT [ "bash" ]
 
-#CMD ["adb", "devices"]
 CMD ["stf", "local"]

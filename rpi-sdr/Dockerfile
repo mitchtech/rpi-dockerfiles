@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y -q \
     libusb-1.0-0-dev \
     python \
     python-numpy \
-    python-pip
+    python-pip \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN echo 'blacklist dvb_usb_rtl28xxu' > /etc/modprobe.d/raspi-blacklist.conf && \
     git clone git://git.osmocom.org/rtl-sdr.git && \

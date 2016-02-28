@@ -10,7 +10,6 @@ MAINTAINER Michael J. Mitchell <michael@mitchtech.net>
 #    --no-install-recommends && \
 #    rm -rf /var/lib/apt/lists/*
 
-#RUN git clone git@github.com:Make-Magazine/PirateRadio.git
 RUN git clone https://github.com/Make-Magazine/PirateRadio.git
 
 CMD ["python", "/PirateRadio/PirateRadio.py"]

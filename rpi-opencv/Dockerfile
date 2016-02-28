@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y -q \
     python-opencv \
     python-all-dev \
     libopencv-dev \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 VOLUME ["/data"]
 

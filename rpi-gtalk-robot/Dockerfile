@@ -2,12 +2,14 @@ FROM mitchtech/rpi-gpio-python
 
 MAINTAINER Michael J. Mitchell <michael@mitchtech.net>
 
-RUN apt-get update && apt-get install -y -q git-core
+RUN apt-get update && apt-get install -y -q \
+    git-core \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN pip install xmpppy pydns
 
-RUN git clone https://github.com/mitchtech/raspi_gtalk_robot.git \
-    && cd raspi_gtalk_robot
+RUN git clone https://github.com/mitchtech/raspi_gtalk_robot.git 
 
 #[pinon|pon|on|high] [pin] : turns on the specified GPIO pin
 #[pinoff|poff|off|low] [pin] : turns off the specified GPIO pin
@@ -16,7 +18,6 @@ RUN git clone https://github.com/mitchtech/raspi_gtalk_robot.git \
 #[available|online|busy|dnd|away|idle|out|xa] [arg1] : set gtalk state and status message to specified argument
 #[shell|bash] [arg1] : executes the specified shell command argument after ‘shell’ or ‘bash’
 
-WORKDIR /data
+WORKDIR /raspi_gtalk_robot
 
 CMD ["python", "./raspiBot.py"]
-#CMD ["bash"]

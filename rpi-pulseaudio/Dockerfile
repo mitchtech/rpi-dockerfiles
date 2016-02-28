@@ -28,4 +28,3 @@ COPY daemon.conf /etc/pulse/daemon.conf
 ENTRYPOINT [ "pulseaudio" ]
 
 CMD [ "--log-level=4", "--log-target=stderr", "-v" ]
-

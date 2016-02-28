@@ -3,12 +3,12 @@ FROM resin/rpi-raspbian:wheezy
 MAINTAINER Michael J. Mitchell <michael@mitchtech.net>
 
 RUN apt-get update && apt-get install -y -q \
-	android-tools* \
-	ca-certificates \
-	curl \
-	usbutils \
-	--no-install-recommends \
-	&& rm -rf /var/lib/apt/lists/*
+    android-tools* \
+    ca-certificates \
+    curl \
+    usbutils \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set up insecure default key
 RUN mkdir -m 0750 /.android
