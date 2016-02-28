@@ -8,7 +8,15 @@
 
 #
 # container aliases
-# 
+#
+
+# aircraft communication addressing/reporting system
+acarsdec(){
+	docker run --rm -it \
+	--device=/dev/bus/usb \
+	--name acarsdec \
+	mitchtech/acarsdec -v -g 450 -r 0 130.025 131.550
+}
 # web-based gui for docker
 dockerui(){
 	del_stopped dockerui
@@ -19,6 +27,16 @@ dockerui(){
 	--name dockerui \
 	hypriot/rpi-dockerui
 }
+# adsb decoder for rtl-sdr
+dump1090(){
+	docker run --rm -it \
+	--net host \
+	-p 8080:8080 \
+	--device=/dev/bus/usb \
+	--name dump1090 \
+	mitchtech/dump1090 
+}
+# fm radio trans
 # node.js-based development environment
 google-coder(){
 	del_stopped google-coder
@@ -47,11 +65,25 @@ httpd(){
 }
 # adafruit neopixel leds
 neopixel(){
+	del_stopped neopixel
+
 	docker run -d \
 	--cap-add SYS_RAWIO \
 	--device /dev/mem \
 	--name neopixel \
 	mitchtech/rpi-neopixel
+}
+# fm radio transmit pifm(sound_file, frequency)
+pifm(){
+	del_stopped pifm
+	local sound_file=$1
+	local frequency=$2
+
+	docker run -d \
+	--cap-add SYS_RAWIO \
+	--device /dev/mem \
+	--name pifm \
+	mitchtech/rpi-pifm ${sound_file} ${frequency}
 }
 
 #
