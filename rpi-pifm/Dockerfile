@@ -6,9 +6,10 @@ RUN apt-get update && apt-get install -y -q \
     build-essential \
     ca-certificates \
     git \
-    python
+    python \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
-#RUN wget https://github.com/rm-hull/pifm/archive/master.zip
 RUN git clone git://github.com/rm-hull/pifm.git && \
     cd pifm && \
     make
