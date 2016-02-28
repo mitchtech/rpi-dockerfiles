@@ -36,7 +36,13 @@ dump1090(){
 	--name dump1090 \
 	mitchtech/dump1090 
 }
-# fm radio trans
+# frequency show visual spectrum analyzer
+freqshow(){
+	docker run --rm -it \
+	--device=/dev/bus/usb \
+	--name freqshow \
+	mitchtech/freqshow 
+}
 # node.js-based development environment
 google-coder(){
 	del_stopped google-coder
@@ -63,6 +69,10 @@ httpd(){
 	--name httpd \
 	mitchtech/rpi-busybox-httpd
 }
+# 
+motion(){
+
+}
 # adafruit neopixel leds
 neopixel(){
 	del_stopped neopixel
@@ -84,6 +94,25 @@ pifm(){
 	--device /dev/mem \
 	--name pifm \
 	mitchtech/rpi-pifm ${sound_file} ${frequency}
+}
+# radio transmitter for am, fm, ssb, sstv, fsq, vfo
+rpitx(){
+	del_stopped rpitx
+	local sound_file=$1
+	local frequency=$2
+
+	docker run -d \
+	--cap-add SYS_RAWIO \
+	--device /dev/mem \
+	--name rpitx \
+	mitchtech/rpi-rpitx ${sound_file} ${frequency}
+}
+# rtl-sdr ais boat/ship tracking
+rtl-ais(){
+	docker run --rm -it \
+	--device=/dev/bus/usb \
+	--name rtl-ais \
+	mitchtech/rtl-ais
 }
 
 #
