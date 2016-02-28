@@ -114,10 +114,10 @@ motion(){
 	--device=/dev/bus/usb \
 	-p 8080:8080 \
     -p 8081:8081 \
-#   -v ./motion.conf:/etc/motion/motion.conf
     -v ./motion:/var/lib/motion \
 	--name motion \
 	mitchtech/rpi-motion
+#   -v ./motion.conf:/etc/motion/motion.conf
 }
 # digital transmission decoder/demodulator
 # multimon-ng(){}
@@ -161,6 +161,8 @@ pirate-radio(){
 	--name pirate-radio \
 	mitchtech/rpi-pirate-radio
 }
+# private web proxy
+# privoxy(){}
 # audio server and proxy
 # pulseaudio(){}
 # real-time database engine
@@ -184,6 +186,14 @@ rtl-ais(){
 	--name rtl-ais \
 	mitchtech/rtl-ais
 }
+# the onion router
+# tor(){}
+# web browser for tor
+# torbrowser(){}
+# instant messenger client for tor
+# tormessenger(){}
+# proxy on top of tor
+# torproxy(){}
 # gpio, wiringpi, pyserial
 wiringpi(){
 	docker run --rm -it \
