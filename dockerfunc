@@ -18,17 +18,11 @@ acarsdec(){
 	mitchtech/acarsdec -v -g 450 -r 0 130.025 131.550
 }
 # adb, fastboot
-android-tools(){
-
-}
+# android-tools(){}
 # beacon bluetooth low energy
-beacon(){
-
-}
+# beacon(){}
 # video and photo webcam capture
-cheese(){
-
-}
+# cheese(){}
 # web-based gui for docker
 dockerui(){
 	del_stopped dockerui
@@ -59,9 +53,7 @@ freqshow(){
 	mitchtech/freqshow 
 }
 # google talk (xmpp) bot
-gtalkbot(){
-
-}
+# gtalkbot(){}
 # node.js-based development environment
 google-coder(){
 	del_stopped google-coder
@@ -72,9 +64,7 @@ google-coder(){
 	hypriot/rpi-google-coder
 }
 # gnuradio suite (osmocom, gqrx)
-gnuradio(){
-
-}
+# gnuradio(){}
 # gpio pin mode/state acess
 gpio(){
 	docker run --rm \
@@ -84,9 +74,7 @@ gpio(){
 	mitchtech/rpi-gpio "$@"
 }
 # physical gmail notification daemon
-gpio-gmail(){
-
-}
+# gpio-gmail(){}
 # minimal busybox http server
 httpd(){
 	del_stopped httpd
@@ -131,10 +119,10 @@ motion(){
 	--name motion \
 	mitchtech/rpi-motion
 }
-# audio player
-mpg123(){
-
-}
+# digital transmission decoder/demodulator
+# multimon-ng(){}
+# text-based audio player
+# mpg123(){}
 # adafruit neopixel leds
 neopixel(){
 	del_stopped neopixel
@@ -146,17 +134,11 @@ neopixel(){
 	mitchtech/rpi-neopixel
 }
 # smartphone test farm
-openstf(){
-
-}
+# openstf(){}
 # computer vision
-opencv(){
-
-}
+# opencv(){}
 # text-based pandora music
-pianobar(){
-
-}
+# pianobar(){}
 # fm radio transmit pifm(sound_file, frequency)
 pifm(){
 	del_stopped pifm
@@ -180,13 +162,9 @@ pirate-radio(){
 	mitchtech/rpi-pirate-radio
 }
 # audio server and proxy
-pulseaudio(){
-
-}
+# pulseaudio(){}
 # real-time database engine
-rethinkdb(){
-
-}
+# rethinkdb(){}
 # radio transmitter for am, fm, ssb, sstv, fsq, vfo
 rpitx(){
 	del_stopped rpitx
