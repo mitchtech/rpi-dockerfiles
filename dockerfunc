@@ -69,9 +69,16 @@ httpd(){
 	--name httpd \
 	mitchtech/rpi-busybox-httpd
 }
-# 
-motion(){
+# kitematic docker gui
+kitematic(){
+	del_stopped kitematic
 
+	docker run -d \
+	--privileged \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-e DISPLAY=172.17.42.1:0.0 \
+	--name kitematic \
+	mitchtech/rpi-kitematic
 }
 # adafruit neopixel leds
 neopixel(){
@@ -95,6 +102,16 @@ pifm(){
 	--name pifm \
 	mitchtech/rpi-pifm ${sound_file} ${frequency}
 }
+# fm radio playlist broadcast
+pirate-radio(){
+	del_stopped pirate-radio
+
+	docker run -d \
+	--cap-add SYS_RAWIO \
+	--device /dev/mem \
+	--name pirate-radio \
+	mitchtech/rpi-pirate-radio
+}
 # radio transmitter for am, fm, ssb, sstv, fsq, vfo
 rpitx(){
 	del_stopped rpitx
@@ -113,6 +130,14 @@ rtl-ais(){
 	--device=/dev/bus/usb \
 	--name rtl-ais \
 	mitchtech/rtl-ais
+}
+# gpio, wiringpi, pyserial
+wiringpi(){
+	docker run --rm it \
+	--cap-add SYS_RAWIO \
+	--device /dev/mem \
+	--name wiringpi \
+	mitchtech/rpi-wiringpi
 }
 
 #
