@@ -19,6 +19,15 @@ dockerui(){
 	--name dockerui \
 	hypriot/rpi-dockerui
 }
+# node.js-based development environment
+google-coder(){
+	del_stopped google-coder
+
+	docker run -d \
+	-p 8080:8080 \
+	--name google-coder \
+	hypriot/rpi-google-coder
+}
 # gpio pin mode/state acess
 gpio(){
 	docker run --rm \
@@ -33,10 +42,17 @@ httpd(){
 
 	docker run -d \
 	-p 80:80 \
-	--name httpd
+	--name httpd \
 	mitchtech/rpi-busybox-httpd
 }
-
+# adafruit neopixel leds
+neopixel(){
+	docker run -d \
+	--cap-add SYS_RAWIO \
+	--device /dev/mem \
+	--name neopixel \
+	mitchtech/rpi-neopixel
+}
 
 #
 # support aliases
