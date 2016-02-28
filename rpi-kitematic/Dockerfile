@@ -4,6 +4,7 @@ MAINTAINER Michael J. Mitchell <michael@mitchtech.net>
 
 RUN apt-get update && apt-get install -y -q \
     build-essential \
+    ca-certificates \
     git \
     make \
     libgtk2.0-0 \
@@ -33,7 +34,8 @@ RUN sed -i 's,https://kitematic.com/recommended.json,http://blog.hypriot.com/rec
 # enable web preview between containers
 RUN sed -i 's/var port = value\[0\].HostPort;/var port = dockerPort; ip = container.NetworkSettings.IPAddress;/' src/utils/ContainerUtil.js
 
-RUN npm install hoek is-property
+RUN npm install hoek
+RUN npm install is-property
 
 RUN make
 
