@@ -14,4 +14,4 @@ RUN git clone git://github.com/antirez/dump1090.git && \
 
 USER root
 
-ENTRYPOINT ["/dump1090/dump1090"]
+ENTRYPOINT ["/dump1090/dump1090", "--interactive", "--net"]
