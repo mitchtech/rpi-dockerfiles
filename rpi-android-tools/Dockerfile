@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian:wheezy
+FROM resin/rpi-raspbian:jessie
 
 MAINTAINER Michael J. Mitchell <michael@mitchtech.net>
 
@@ -7,17 +7,16 @@ RUN apt-get update && apt-get install -y -q \
     ca-certificates \
     curl \
     usbutils \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set up insecure default key
 RUN mkdir -m 0750 /.android
 
-ADD insecure_shared_adbkey /.android/adbkey
-ADD insecure_shared_adbkey.pub /.android/adbkey.pub
+#ADD insecure_shared_adbkey /.android/adbkey
+#ADD insecure_shared_adbkey.pub /.android/adbkey.pub
 
 WORKDIR /data
 
-ENTRYPOINT [ "bash" ]
-
-CMD ["adb", "devices"]
+#CMD ["adb", "devices"]
+ENTRYPOINT ["bash"]
