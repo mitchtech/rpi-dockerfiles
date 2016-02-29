@@ -12,13 +12,20 @@
 
 # aircraft communication addressing/reporting system
 acarsdec(){
-	docker run --rm -it \
+	del_stopped acarsdec
+
+	docker run -d \
 	--device=/dev/bus/usb \
 	--name acarsdec \
 	mitchtech/rpi-acarsdec -v -g 450 -r 0 130.025 131.550
 }
 # adb, fastboot
-# android-tools(){}
+android-tools(){
+	docker run --rm -it \
+	--device=/dev/bus/usb \
+	--name android-tools \
+	mitchtech/rpi-android-tools 
+}
 # beacon bluetooth low energy
 # beacon(){}
 # video and photo webcam capture
@@ -35,13 +42,17 @@ dockerui(){
 }
 # adsb decoder for rtl-sdr
 dump1090(){
-	docker run --rm -it \
+	del_stopped dump1090
+
+	docker run -d \
 	--net host \
 	-p 8080:8080 \
 	--device=/dev/bus/usb \
 	--name dump1090 \
-	mitchtech/rpi-dump1090 
+	mitchtech/rpi-dump1090 --interactive --net
 }
+# real-time adsb aircraft tracking
+# flightaware(){}
 # frequency show visual spectrum analyzer
 freqshow(){
 	docker run --rm -it \
@@ -67,11 +78,11 @@ google-coder(){
 # gnuradio(){}
 # gpio pin mode/state acess
 gpio(){
-	docker run --rm \
+	docker run --rm -it \
 	--cap-add SYS_RAWIO \
 	--device /dev/mem \
 	--name gpio \
-	mitchtech/rpi-gpio "$@"
+	mitchtech/rpi-wiringpi "$@"
 }
 # physical gmail notification daemon
 # gpio-gmail(){}
@@ -84,6 +95,10 @@ httpd(){
 	--name httpd \
 	mitchtech/rpi-busybox-httpd
 }
+# voice control platform
+# jasper(){}
+# gsm base station scanner
+# kalibrate(){}
 # kitematic docker gui
 kitematic(){
 	del_stopped kitematic
@@ -105,6 +120,8 @@ kivy-infoscreen(){
 	--name kivy-infoscreen \
 	mitchtech/rpi-kivy-infoscreen
 }
+# modulation/demodulation over rf
+# minimodem(){}
 # webcam and motion detection server
 motion(){
 	del_stopped motion
@@ -134,6 +151,8 @@ neopixel(){
 	--name neopixel \
 	mitchtech/rpi-neopixel
 }
+# nintendo emulator
+# nes(){}
 # smartphone test farm
 # openstf(){}
 # computer vision
@@ -182,7 +201,9 @@ rpitx(){
 }
 # rtl-sdr ais boat/ship tracking
 rtl-ais(){
-	docker run --rm -it \
+	del_stopped rtl-ais
+
+	docker run -d \
 	--device=/dev/bus/usb \
 	--name rtl-ais \
 	mitchtech/rpi-rtl-ais
@@ -195,6 +216,8 @@ rtl-ais(){
 # tormessenger(){}
 # proxy on top of tor
 # torproxy(){}
+# bittorrent client
+# transmission(){}
 # gpio, wiringpi, pyserial
 wiringpi(){
 	docker run --rm -it \
