@@ -31,6 +31,19 @@ android-tools(){
 # video and photo webcam capture
 # cheese(){}
 # web-based gui for docker
+# movies via nzbs & torrents
+couchpotato(){
+	del_stopped couchpotato
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v $HOME/.sonarr:/config \
+		-v $HOME/Downloads:/downloads \
+		-v $HOME/movies:/movies \
+		-p 5050:5050 \
+		--name couchpotato \
+		mitchtech/rpi-couchpotato
+}
 dockerui(){
 	del_stopped dockerui
 
@@ -208,6 +221,31 @@ rtl-ais(){
 	--name rtl-ais \
 	mitchtech/rpi-rtl-ais
 }
+# usenet binary downloader
+sabnzbd(){
+	del_stopped sabnzbd
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v $HOME/.sabnzbd:/config \
+		-v $HOME/Downloads:/data \
+		-p 8080:8080 \
+		--name sabnzbd \
+		mitchtech/rpi-sabnzbd
+}
+# pvr for usenet and bittorrent
+sonarr(){
+	del_stopped sonarr
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v $HOME/.sonarr:/config \
+		-v $HOME/Downloads:/downloads \
+		-v $HOME/TV:/tv \
+		-p 8080:8080 \
+		--name sonarr \
+		mitchtech/rpi-sonarr
+}
 # the onion router
 # tor(){}
 # web browser for tor
@@ -217,7 +255,22 @@ rtl-ais(){
 # proxy on top of tor
 # torproxy(){}
 # bittorrent client
-# transmission(){}
+transmission(){
+	del_stopped transmission
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v $HOME/.transmission:/config \
+		-v $HOME/Downloads:/downloads \
+		-p 9091:9091 \
+		-p 51413:51413 \
+		-p 51413:51413/udp \
+		--name transmission \
+		mitchtech/rpi-transmission
+		# -v $HOME/Torrents:/transmission/download \
+		# -v $HOME/.transmission:/transmission/config \
+		# transmission -v pass -u user
+}
 # gpio, wiringpi, pyserial
 wiringpi(){
 	docker run --rm -it \
