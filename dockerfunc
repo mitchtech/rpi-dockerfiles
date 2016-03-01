@@ -15,16 +15,16 @@ acarsdec(){
 	del_stopped acarsdec
 
 	docker run -d \
-	--device=/dev/bus/usb \
-	--name acarsdec \
-	mitchtech/rpi-acarsdec -v -g 450 -r 0 130.025 131.550
+		--device=/dev/bus/usb \
+		--name acarsdec \
+		mitchtech/rpi-acarsdec -v -g 450 -r 0 130.025 131.550
 }
 # adb, fastboot
 android-tools(){
 	docker run --rm -it \
-	--device=/dev/bus/usb \
-	--name android-tools \
-	mitchtech/rpi-android-tools 
+		--device=/dev/bus/usb \
+		--name android-tools \
+		mitchtech/rpi-android-tools 
 }
 # beacon bluetooth low energy
 # beacon(){}
@@ -48,33 +48,43 @@ dockerui(){
 	del_stopped dockerui
 
 	docker run -d \
-	-p 9000:9000 \
-	-v /var/run/docker.sock:/var/run/docker.sock \
-	--name dockerui \
-	hypriot/rpi-dockerui
+		-p 9000:9000 \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		--name dockerui \
+		hypriot/rpi-dockerui
 }
 # adsb decoder for rtl-sdr
 dump1090(){
 	del_stopped dump1090
 
 	docker run -d \
-	--net host \
-	-p 8080:8080 \
-	--device=/dev/bus/usb \
-	--name dump1090 \
-	mitchtech/rpi-dump1090 --interactive --net
+		--net host \
+		-p 8080:8080 \
+		--device=/dev/bus/usb \
+		--name dump1090 \
+		mitchtech/rpi-dump1090 --interactive --net
+}
+# dns, dhcp, network infrastructure
+dnsmasq(){
+	del_stopped dnsmasq
+
+	docker run -d \
+		-p=53:53/udp
+		-v .dnsmasq:/dnsmasq
+		--name dnsmasq \
+		mitchtech/rpi-dnsmasq
 }
 # real-time adsb aircraft tracking
 # flightaware(){}
 # frequency show visual spectrum analyzer
 freqshow(){
 	docker run --rm -it \
-	--privileged \
-	--device=/dev/bus/usb \
-	-v /var/run/docker.sock:/var/run/docker.sock \
-	-e DISPLAY=172.17.42.1:0.0 \
-	--name freqshow \
-	mitchtech/rpi-freqshow 
+		--privileged \
+		--device=/dev/bus/usb \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-e DISPLAY=172.17.42.1:0.0 \
+		--name freqshow \
+		mitchtech/rpi-freqshow
 }
 # google talk (xmpp) bot
 # gtalkbot(){}
@@ -83,19 +93,19 @@ google-coder(){
 	del_stopped google-coder
 
 	docker run -d \
-	-p 8080:8080 \
-	--name google-coder \
-	hypriot/rpi-google-coder
+		-p 8080:8080 \
+		--name google-coder \
+		hypriot/rpi-google-coder
 }
 # gnuradio suite (osmocom, gqrx)
 # gnuradio(){}
 # gpio pin mode/state acess
 gpio(){
 	docker run --rm -it \
-	--cap-add SYS_RAWIO \
-	--device /dev/mem \
-	--name gpio \
-	mitchtech/rpi-wiringpi "$@"
+		--cap-add SYS_RAWIO \
+		--device /dev/mem \
+		--name gpio \
+		mitchtech/rpi-wiringpi "$@"
 }
 # physical gmail notification daemon
 # gpio-gmail(){}
@@ -104,9 +114,9 @@ httpd(){
 	del_stopped httpd
 
 	docker run -d \
-	-p 80:80 \
-	--name httpd \
-	mitchtech/rpi-busybox-httpd
+		-p 80:80 \
+		--name httpd \
+		mitchtech/rpi-busybox-httpd
 }
 # voice control platform
 # jasper(){}
@@ -117,21 +127,21 @@ kitematic(){
 	del_stopped kitematic
 
 	docker run -d \
-	--privileged \
-	-v /var/run/docker.sock:/var/run/docker.sock \
-	-e DISPLAY=172.17.42.1:0.0 \
-	--name kitematic \
-	mitchtech/rpi-kitematic
+		--privileged \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-e DISPLAY=172.17.42.1:0.0 \
+		--name kitematic \
+		mitchtech/rpi-kitematic
 }
 # kivy graphic info screen
 kivy-infoscreen(){
 	del_stopped kivy-infoscreen
 
 	docker run -d \
-	--privileged \
-	-e DISPLAY=172.17.42.1:0.0 \
-	--name kivy-infoscreen \
-	mitchtech/rpi-kivy-infoscreen
+		--privileged \
+		-e DISPLAY=172.17.42.1:0.0 \
+		--name kivy-infoscreen \
+		mitchtech/rpi-kivy-infoscreen
 }
 # modulation/demodulation over rf
 # minimodem(){}
@@ -140,15 +150,15 @@ motion(){
 	del_stopped motion
 
 	docker run -d \
-	--privileged \
-	--restart always \
-	--device=/dev/bus/usb \
-	-p 8080:8080 \
-    -p 8081:8081 \
-	--name motion \
-	mitchtech/rpi-motion
-    # -v ./motion:/var/lib/motion \
-    # -v ./motion.conf:/etc/motion/motion.conf
+		--privileged \
+		--restart always \
+		--device=/dev/bus/usb \
+		-p 8080:8080 \
+	    -p 8081:8081 \
+		--name motion \
+		mitchtech/rpi-motion
+	    # -v ./motion:/var/lib/motion \
+	    # -v ./motion.conf:/etc/motion/motion.conf
 }
 # digital transmission decoder/demodulator
 # multimon-ng(){}
@@ -159,13 +169,24 @@ neopixel(){
 	del_stopped neopixel
 
 	docker run -d \
-	--cap-add SYS_RAWIO \
-	--device /dev/mem \
-	--name neopixel \
-	mitchtech/rpi-neopixel
+		--cap-add SYS_RAWIO \
+		--device /dev/mem \
+		--name neopixel \
+		mitchtech/rpi-neopixel
 }
 # nintendo emulator
 # nes(){}
+# 
+nginx(){
+	del_stopped nginx
+
+	docker run -d \
+		--restart always \
+		-v $HOME/.nginx:/etc/nginx \
+		--net host \
+		--name nginx \
+		nginx
+}
 # smartphone test farm
 # openstf(){}
 # computer vision
@@ -179,20 +200,20 @@ pifm(){
 	local frequency=$2
 
 	docker run -d \
-	--cap-add SYS_RAWIO \
-	--device /dev/mem \
-	--name pifm \
-	mitchtech/rpi-pifm ${sound_file} ${frequency}
+		--cap-add SYS_RAWIO \
+		--device /dev/mem \
+		--name pifm \
+		mitchtech/rpi-pifm ${sound_file} ${frequency}
 }
 # fm radio playlist broadcast
 pirate-radio(){
 	del_stopped pirate-radio
 
 	docker run -d \
-	--cap-add SYS_RAWIO \
-	--device /dev/mem \
-	--name pirate-radio \
-	mitchtech/rpi-pirate-radio
+		--cap-add SYS_RAWIO \
+		--device /dev/mem \
+		--name pirate-radio \
+		mitchtech/rpi-pirate-radio
 }
 # private web proxy
 # privoxy(){}
@@ -207,19 +228,19 @@ rpitx(){
 	local frequency=$2
 
 	docker run -d \
-	--cap-add SYS_RAWIO \
-	--device /dev/mem \
-	--name rpitx \
-	mitchtech/rpi-rpitx ${sound_file} ${frequency}
+		--cap-add SYS_RAWIO \
+		--device /dev/mem \
+		--name rpitx \
+		mitchtech/rpi-rpitx ${sound_file} ${frequency}
 }
 # rtl-sdr ais boat/ship tracking
 rtl-ais(){
 	del_stopped rtl-ais
 
 	docker run -d \
-	--device=/dev/bus/usb \
-	--name rtl-ais \
-	mitchtech/rpi-rtl-ais
+		--device=/dev/bus/usb \
+		--name rtl-ais \
+		mitchtech/rpi-rtl-ais
 }
 # usenet binary downloader
 sabnzbd(){
@@ -232,6 +253,20 @@ sabnzbd(){
 		-p 8080:8080 \
 		--name sabnzbd \
 		mitchtech/rpi-sabnzbd
+}
+# pvr for usenet and bittorrent
+sickbeard(){
+	del_stopped sickbeard
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v $HOME/.sickbeard:/config \
+		-v $HOME/Downloads:/data/downloads \
+		-v $HOME/.nzb:/data/nzb \
+		-v $HOME/.torrents:/data/torrents \
+		-p 8081:8081 \
+		--name sickbeard \
+		mitchtech/rpi-sickbeard
 }
 # pvr for usenet and bittorrent
 sonarr(){
@@ -274,10 +309,10 @@ transmission(){
 # gpio, wiringpi, pyserial
 wiringpi(){
 	docker run --rm -it \
-	--cap-add SYS_RAWIO \
-	--device /dev/mem \
-	--name wiringpi \
-	mitchtech/rpi-wiringpi
+		--cap-add SYS_RAWIO \
+		--device /dev/mem \
+		--name wiringpi \
+		mitchtech/rpi-wiringpi
 }
 
 #
