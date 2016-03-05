@@ -19,6 +19,18 @@ acarsdec(){
 		--name acarsdec \
 		mitchtech/rpi-acarsdec -v -g 450 -r 0 130.025 131.550
 }
+# amazon alexa client
+alexapi(){
+	del_stopped alexapi
+
+	docker run -d \
+		--net host \
+		-p 5000:5000 \
+		--device /dev/snd \
+		--device=/dev/bus/usb \
+		--name alexapi \
+		mitchtech/rpi-alexapi
+}
 # adb, fastboot
 android-tools(){
 	docker run --rm -it \
@@ -44,6 +56,7 @@ couchpotato(){
 		--name couchpotato \
 		mitchtech/rpi-couchpotato
 }
+# web interface for docker
 dockerui(){
 	del_stopped dockerui
 
@@ -70,7 +83,7 @@ dnsmasq(){
 
 	docker run -d \
 		-p=53:53/udp
-		-v .dnsmasq:/dnsmasq
+		-v .dnsmasq:/dnsmasq \
 		--name dnsmasq \
 		mitchtech/rpi-dnsmasq
 }
