@@ -223,7 +223,8 @@ pirate-radio(){
 
 	docker run -d \
 		--cap-add SYS_RAWIO \
-		--device /dev/mem \
+		--device /dev/mem \	                       -v $PWD/pirateradio.conf:/pirateradio/pirateradio.conf \
+                -v $PWD:/pirateradio \
 		--name pirate-radio \
 		mitchtech/rpi-pirate-radio
 }
