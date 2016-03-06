@@ -164,7 +164,7 @@ motion(){
 
 	docker run -d \
 		--device=/dev/video0 \
-	    -v ./motion.conf:/etc/motion/motion.conf
+	    -v ./motion.conf:/etc/motion/motion.conf \
 		-p 8080:8080 \
 	    -p 8081:8081 \
 		--name motion \
