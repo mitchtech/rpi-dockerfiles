@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash wrappers for docker run commands
-# refs: 
+# refs:
 # https://github.com/jfrazelle/dotfiles
 # https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 
@@ -36,7 +36,7 @@ android-tools(){
 	docker run --rm -it \
 		--device=/dev/bus/usb \
 		--name android-tools \
-		mitchtech/rpi-android-tools 
+		mitchtech/rpi-android-tools
 }
 # beacon bluetooth low energy
 # beacon(){}
@@ -164,7 +164,7 @@ motion(){
 
 	docker run -d \
 		--device=/dev/video0 \
-	    -v ./motion.conf:/etc/motion/motion.conf \
+	    -v $PWD/motion.conf:/etc/motion/motion.conf \
 		-p 8080:8080 \
 	    -p 8081:8081 \
 		--name motion \
@@ -188,7 +188,7 @@ neopixel(){
 }
 # nintendo emulator
 # nes(){}
-# 
+#
 nginx(){
 	del_stopped nginx
 
