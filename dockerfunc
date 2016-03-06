@@ -163,15 +163,14 @@ motion(){
 	del_stopped motion
 
 	docker run -d \
-		--privileged \
-		--restart always \
-		--device=/dev/bus/usb \
+		--device=/dev/video0 \
+	    -v ./motion.conf:/etc/motion/motion.conf
 		-p 8080:8080 \
 	    -p 8081:8081 \
 		--name motion \
 		mitchtech/rpi-motion
+		# --privileged \
 	    # -v ./motion:/var/lib/motion \
-	    # -v ./motion.conf:/etc/motion/motion.conf
 }
 # digital transmission decoder/demodulator
 # multimon-ng(){}
