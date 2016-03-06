@@ -113,13 +113,13 @@ google-coder(){
 # gnuradio suite (osmocom, gqrx)
 # gnuradio(){}
 # gpio pin mode/state acess
-gpio(){
-	docker run --rm -it \
-		--cap-add SYS_RAWIO \
-		--device /dev/mem \
-		--name gpio \
-		mitchtech/rpi-wiringpi "$@"
-}
+# gpio(){
+# 	docker run --rm -it \
+# 		--cap-add SYS_RAWIO \
+# 		--device /dev/mem \
+# 		--name gpio \
+# 		mitchtech/rpi-wiringpi "$@"
+# }
 # physical gmail notification daemon
 # gpio-gmail(){}
 # minimal busybox http server
@@ -180,6 +180,7 @@ mpg123(){
 		--privileged \
 		--device /dev/snd \
 		-v $PWD/audio.mp3:/audio.mp3 \
+		-v $PWD:/audio \
 		--name mpg123 \
 		mitchtech/rpi-mpg123	
 }

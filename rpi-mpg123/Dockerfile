@@ -8,9 +8,8 @@ RUN apt-get update && apt-get install -y -q \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-#RUN amixer cset numid=3 1 
 #RUN modprobe snd_bcm2835 
-
-COPY audio.mp3 /root/audio.mp3
+#RUN amixer cset numid=3 1 
+#COPY audio.mp3 /audio.mp3
 
 ENTRYPOINT ["mpg123", "audio.mp3"]
