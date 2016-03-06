@@ -175,7 +175,14 @@ motion(){
 # digital transmission decoder/demodulator
 # multimon-ng(){}
 # text-based audio player
-# mpg123(){}
+mpg123(){
+	docker run --rm -it \
+		--privileged \
+		--device /dev/snd \
+		-v $PWD/audio.mp3:/audio.mp3 \
+		--name mpg123 \
+		mitchtech/rpi-mpg123	
+}
 # adafruit neopixel leds
 neopixel(){
 	del_stopped neopixel
@@ -204,7 +211,14 @@ nginx(){
 # computer vision
 # opencv(){}
 # text-based pandora music
-# pianobar(){}
+pianobar(){
+	docker run --rm -it \
+		--privileged \
+		--net host \
+		--device /dev/snd \
+		--name pianobar \
+		mitchtech/rpi-pianobar	
+}
 # fm radio transmit pifm(sound_file, frequency)
 pifm(){
 	del_stopped pifm
@@ -223,8 +237,9 @@ pirate-radio(){
 
 	docker run -d \
 		--cap-add SYS_RAWIO \
-		--device /dev/mem \	                       -v $PWD/pirateradio.conf:/pirateradio/pirateradio.conf \
-                -v $PWD:/pirateradio \
+		--device /dev/mem \
+		-v $PWD/pirateradio.conf:/pirateradio/pirateradio.conf \
+		-v $PWD:/pirateradio \
 		--name pirate-radio \
 		mitchtech/rpi-pirate-radio
 }
