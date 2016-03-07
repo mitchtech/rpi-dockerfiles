@@ -221,6 +221,18 @@ nginx(){
 		--name nginx \
 		nginx
 }
+# pdf viewer and presentation tool
+okular(){
+	del_stopped okular
+	xhost +  
+
+	docker run -d \
+		-e DISPLAY=unix:0 \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		--name okular \
+		mitchtech/rpi-okular "$@"
+		# --privileged \
+}
 # smartphone test farm
 # openstf(){}
 # computer vision
