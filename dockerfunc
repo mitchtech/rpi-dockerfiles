@@ -134,15 +134,15 @@ httpd(){
 # debian firefox web brower
 iceweasel(){
 	del_stopped iceweasel
-	xhost +
+	xhost +  
 
 	docker run -d \
-		--privileged \
-		--net host
+		--net host \
 		-e DISPLAY=unix:0 \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		--name iceweasel \
 		mitchtech/rpi-iceweasel "$@"
+		# --privileged \
 		# --restart=on-failure:5 \
 }
 # voice control platform
