@@ -131,6 +131,20 @@ httpd(){
 		--name httpd \
 		mitchtech/rpi-busybox-httpd
 }
+# debian firefox web brower
+iceweasel(){
+	del_stopped iceweasel
+	xhost +
+
+	docker run -d \
+		--privileged \
+		--net host
+		-e DISPLAY=unix:0 \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		--name iceweasel \
+		mitchtech/rpi-iceweasel "$@"
+		# --restart=on-failure:5 \
+}
 # voice control platform
 # jasper(){}
 # gsm base station scanner
@@ -196,7 +210,7 @@ neopixel(){
 }
 # nintendo emulator
 # nes(){}
-#
+# web and reverse proxy server
 nginx(){
 	del_stopped nginx
 
