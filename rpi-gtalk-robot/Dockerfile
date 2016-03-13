@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y -q \
 
 RUN pip install xmpppy pydns
 
-RUN git clone https://github.com/mitchtech/raspi_gtalk_robot.git 
+RUN git clone git://github.com/mitchtech/raspi_gtalk_robot.git 
 
 #[pinon|pon|on|high] [pin] : turns on the specified GPIO pin
 #[pinoff|poff|off|low] [pin] : turns off the specified GPIO pin
