@@ -53,6 +53,7 @@ couchpotato(){
 		-v $HOME/Downloads:/downloads \
 		-v $HOME/movies:/movies \
 		-p 5050:5050 \
+		--restart=always \
 		--name couchpotato \
 		mitchtech/rpi-couchpotato
 }
@@ -306,6 +307,7 @@ sabnzbd(){
 		-v $HOME/.sabnzbd:/config \
 		-v $HOME/Downloads:/data \
 		-p 8080:8080 \
+		--restart=always \
 		--name sabnzbd \
 		mitchtech/rpi-sabnzbd
 }
@@ -320,6 +322,7 @@ sickbeard(){
 		-v $HOME/.nzb:/data/nzb \
 		-v $HOME/.torrents:/data/torrents \
 		-p 8081:8081 \
+		--restart=always \
 		--name sickbeard \
 		mitchtech/rpi-sickbeard
 }
