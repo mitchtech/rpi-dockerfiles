@@ -38,11 +38,25 @@ android-tools(){
 		--name android-tools \
 		mitchtech/rpi-android-tools
 }
+# arduino
+arduino(){
+	del_stopped arduino
+	xhost +  
+
+	docker run -d \
+		--device=/dev/bus/usb \
+		-e DISPLAY=unix:0 \
+		-v $PWD:/sketchbook \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		--name arduino \
+		mitchtech/rpi-arduino
+}
 # beacon bluetooth low energy
 # beacon(){}
 # video and photo webcam capture
 # cheese(){}
-# web-based gui for docker
+# web browser
+# chromium(){}
 # movies via nzbs & torrents
 couchpotato(){
 	del_stopped couchpotato
@@ -87,6 +101,27 @@ dnsmasq(){
 		-v .dnsmasq:/dnsmasq \
 		--name dnsmasq \
 		mitchtech/rpi-dnsmasq
+}
+# command line text-to-speech
+festival(){
+	del_stopped festival	
+
+	docker run --rm -d \
+		--name festival \
+		--device /dev/snd \
+		mitchtech/rpi-festival \
+		echo $@ | festival --tts
+		#"echo" "$@" "|" "festival" "--tts"
+}
+# lightweight command line text-to-speech
+flite(){
+	del_stopped flite	
+
+	docker run --rm -d \
+		--name festival \
+		--device /dev/snd \
+		mitchtech/rpi-flite \
+		flite -t "$@"
 }
 # real-time adsb aircraft tracking
 # flightaware(){}
