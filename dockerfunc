@@ -399,6 +399,32 @@ transmission(){
 		# -v $HOME/.transmission:/transmission/config \
 		# transmission -v pass -u user
 }
+# android test automation
+uiautomator(){
+	del_stopped uiautomator
+
+	docker run -d \
+		--privileged \
+		-p 2222:2222 \
+		-v /dev/bus/usb:/dev/bus/usb \
+		-v /etc/localtime:/etc/localtime:ro \
+		--name uiautomator \
+		mitchtech/uiautomator 
+}
+# android test automation x windows
+uiautomatorx(){
+	del_stopped uiautomator
+
+	docker run -d \
+		--privileged \
+		-p 2222:2222 \
+		-e DISPLAY=$DISPLAY \
+		-v /dev/bus/usb:/dev/bus/usb \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-v /etc/localtime:/etc/localtime:ro \
+		--name uiautomator \
+		mitchtech/uiautomator 
+}
 # gpio, wiringpi, pyserial
 wiringpi(){
 	docker run --rm -it \
