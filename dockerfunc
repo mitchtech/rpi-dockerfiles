@@ -311,7 +311,17 @@ pirate-radio(){
 # audio server and proxy
 # pulseaudio(){}
 # real-time database engine
-# rethinkdb(){}
+rethinkdb(){
+	del_stopped rethinkdb
+
+	docker run -d \
+		-p 8081:8081 \
+		-p 28015:28015 \
+		-p 29015:29015 \
+		-v $PWD:/data \
+		--name rethinkdb \
+		mitchtech/rpi-rethinkdb
+}
 # radio transmitter for am, fm, ssb, sstv, fsq, vfo
 rpitx(){
 	del_stopped rpitx
@@ -374,6 +384,8 @@ sonarr(){
 		--name sonarr \
 		mitchtech/rpi-sonarr
 }
+# mouse and keyboard sharing
+# synergy
 # the onion router
 # tor(){}
 # web browser for tor
@@ -425,6 +437,10 @@ uiautomatorx(){
 		--name uiautomator \
 		mitchtech/uiautomator 
 }
+# remote access and control
+# vnc(){}
+# web browser-based development environment
+# webide(){}
 # gpio, wiringpi, pyserial
 wiringpi(){
 	docker run --rm -it \
@@ -432,6 +448,17 @@ wiringpi(){
 		--device /dev/mem \
 		--name wiringpi \
 		mitchtech/rpi-wiringpi
+}
+# x11-apps demo for basic docker x11 setup
+xeyes(){
+	del_stopped xeyes
+
+	docker run -d \
+		--privileged \
+		-e DISPLAY=$DISPLAY \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		--name xeyes \
+		mitchtech/x11-apps 
 }
 
 #
