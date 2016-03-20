@@ -91,6 +91,8 @@ couchpotato(){
 		--name couchpotato \
 		mitchtech/rpi-couchpotato
 }
+# ruby based dashboard
+# dashing(){}
 # web interface for docker
 dockerui(){
 	del_stopped dockerui
@@ -121,6 +123,20 @@ dnsmasq(){
 		-v .dnsmasq:/dnsmasq \
 		--name dnsmasq \
 		mitchtech/rpi-dnsmasq
+}
+# lightweight web brower
+epiphany(){
+	del_stopped epiphany
+	xhost +  
+
+	docker run -d \
+		--net host \
+		-e DISPLAY=unix:0 \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		--name epiphany \
+		mitchtech/rpi-epiphany "$@"
+		# --privileged \
+		# --restart=on-failure:5 \
 }
 # command line text-to-speech
 festival(){
@@ -178,6 +194,10 @@ google-coder(){
 # }
 # physical gmail notification daemon
 # gpio-gmail(){}
+# video and photo webcam capture
+# guvcview(){}
+# wifi access point
+# hostapd(){}
 # minimal busybox http server
 httpd(){
 	del_stopped httpd
@@ -226,11 +246,40 @@ kivy-infoscreen(){
 		--name kivy-infoscreen \
 		mitchtech/rpi-kivy-infoscreen
 }
+# documents, spreadsheets, and slides
+libreoffice(){
+	xhost + 
+	del_stopped libreoffice
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-e DISPLAY=unix$DISPLAY \
+		-v $HOME/slides:/root/slides \
+		--name libreoffice \
+		mitchtech/rpi-libreoffice
+		# -e GDK_SCALE \
+		# -e GDK_DPI_SCALE \
+}
 # text-based web browser
 lynx(){
 	docker run --rm -it \
 		--name lynx \
 		mitchtech/rpi-lynx "$@"
+}
+# lightweight web brower
+midori(){
+	del_stopped midori
+	xhost +  
+
+	docker run -d \
+		--net host \
+		-e DISPLAY=unix:0 \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		--name midori \
+		mitchtech/rpi-midori "$@"
+		# --privileged \
+		# --restart=on-failure:5 \
 }
 # modulation/demodulation over rf
 # minimodem(){}
@@ -272,6 +321,12 @@ neopixel(){
 }
 # nintendo emulator
 # nes(){}
+# read and write tcp/ip connections
+netcat(){
+	docker run --rm -it \
+		--net host \
+		mitchtech/rpi-netcat "$@"
+}
 # web and reverse proxy server
 nginx(){
 	del_stopped nginx
@@ -281,7 +336,13 @@ nginx(){
 		-v $HOME/.nginx:/etc/nginx \
 		--net host \
 		--name nginx \
-		nginx
+		mitchtech/rpi-nginx
+}
+# network map port scanner
+nmap(){
+	docker run --rm -it \
+		--net host \
+		mitchtech/rpi-nmap "$@"
 }
 # pdf viewer and presentation tool
 okular(){
