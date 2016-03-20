@@ -31,6 +31,13 @@ alexapi(){
 		--name alexapi \
 		mitchtech/rpi-alexapi
 }
+# search for files within apt packages
+apt_file(){
+	docker run --rm -it \
+		--name apt-file \
+		mitchtech/rpi-apt-file
+}
+alias apt-file="apt_file"
 # adb, fastboot
 android-tools(){
 	docker run --rm -it \
@@ -54,7 +61,20 @@ arduino(){
 # beacon bluetooth low energy
 # beacon(){}
 # video and photo webcam capture
-# cheese(){}
+cheese(){
+	del_stopped cheese
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-e DISPLAY=unix$DISPLAY \
+		-v $HOME/Pictures:/root/Pictures \
+		--device /dev/video0 \
+		--device /dev/snd \
+		--device /dev/dri \
+		--name cheese \
+		mitchtech/rpi-cheese
+}
 # web browser
 # chromium(){}
 # movies via nzbs & torrents
@@ -205,6 +225,12 @@ kivy-infoscreen(){
 		-e DISPLAY=172.17.42.1:0.0 \
 		--name kivy-infoscreen \
 		mitchtech/rpi-kivy-infoscreen
+}
+# text-based web browser
+lynx(){
+	docker run --rm -it \
+		--name lynx \
+		mitchtech/rpi-lynx "$@"
 }
 # modulation/demodulation over rf
 # minimodem(){}
