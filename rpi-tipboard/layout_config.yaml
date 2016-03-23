@@ -1,0 +1,52 @@
+details:
+  page_title: Dashboard
+  layout:
+    - row_1_of_2:
+      - col_1_of_4:
+        - tile_template: text
+          tile_id: id_r1_c1
+          title: Empty Tile
+          classes:
+
+      - col_2_of_4:
+        - tile_template: pie_chart
+          tile_id: id_r1_c2
+          title: Empty Tile
+          classes:
+
+      - col_3_of_4:
+        - tile_template: line_chart
+          tile_id: id_r1_c3
+          title: Empty Tile
+          classes:
+
+      - col_4_of_4:
+        - tile_template: simple_percentage
+          tile_id: id_r1_c4
+          title: Empty Tile
+          classes:
+
+    - row_2_of_2:
+      - col_1_of_4:
+        - tile_template: listing
+          tile_id: id_r2_c1
+          title: Empty Tile
+          classes:
+
+      - col_2_of_4:
+        - tile_template: bar_chart
+          tile_id: id_r2_c2
+          title: Empty Tile
+          classes:
+
+      - col_3_of_4:
+        - tile_template: big_value
+          tile_id: id_r2_c3
+          title: Empty Tile
+          classes:
+
+      - col_4_of_4:
+        - tile_template: fancy_listing
+          tile_id: id_r2_c4
+          title: Empty Tile
+          classes:
