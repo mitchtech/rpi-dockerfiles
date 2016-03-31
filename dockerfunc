@@ -91,8 +91,15 @@ couchpotato(){
 		--name couchpotato \
 		mitchtech/rpi-couchpotato
 }
-# ruby based dashboard
-# dashing(){}
+# ruby-based web dashboard
+dashing(){
+	del_stopped dashing
+
+	docker run -d \
+		-p 3030:3030 \
+		--name dashing \
+		mitchtech/rpi-dashing
+}
 # web interface for docker
 dockerui(){
 	del_stopped dockerui
@@ -138,6 +145,7 @@ epiphany(){
 		# --privileged \
 		# --restart=on-failure:5 \
 }
+
 # command line text-to-speech
 festival(){
 	del_stopped festival	
@@ -473,6 +481,17 @@ sonarr(){
 }
 # mouse and keyboard sharing
 # synergy
+# python-based web dashboard
+tipboard(){
+	del_stopped tipboard
+
+	docker run -d \
+		-p 7272:7272 \
+		--name=tipboard \
+		mitchtech/rpi-tipboard
+		# -v $PWD/settings-local.py:/root/.tipboard/settings-local.py \
+		# -v $PWD/layout_config.yaml:/root/.tipboard/layout_config.yaml \
+}
 # the onion router
 # tor(){}
 # web browser for tor
