@@ -31,4 +31,6 @@ RUN cd /evilbts/yatebts && \
     ln -s /usr/local/share/yate/nib_web /var/www/html/nib && \
     chmod a+w -R /usr/local/etc/yate
 
-ENTRYPOINT ["bash"]
+EXPOSE 80
+
+CMD ["yate -s"]
