@@ -48,7 +48,7 @@ android-tools(){
 # arduino
 arduino(){
 	del_stopped arduino
-	xhost +  
+	xhost +
 
 	docker run -d \
 		--device=/dev/bus/usb \
@@ -60,6 +60,13 @@ arduino(){
 }
 # beacon bluetooth low energy
 # beacon(){}
+# cli tool for bladerf sdr
+bladerf-cli(){
+	docker run -it --rm \
+		--device=/dev/bus/usb \
+		--name bladerf-cli \
+		mitchtech/rpi-bladerf bladeRF-cli -i
+}
 # video and photo webcam capture
 cheese(){
 	del_stopped cheese
@@ -134,7 +141,7 @@ dnsmasq(){
 # lightweight web brower
 epiphany(){
 	del_stopped epiphany
-	xhost +  
+	xhost +
 
 	docker run -d \
 		--net host \
@@ -148,7 +155,7 @@ epiphany(){
 
 # command line text-to-speech
 festival(){
-	del_stopped festival	
+	del_stopped festival
 
 	docker run --rm -d \
 		--name festival \
@@ -159,7 +166,7 @@ festival(){
 }
 # lightweight command line text-to-speech
 flite(){
-	del_stopped flite	
+	del_stopped flite
 
 	docker run --rm -d \
 		--name festival \
@@ -218,7 +225,7 @@ httpd(){
 # debian firefox web brower
 iceweasel(){
 	del_stopped iceweasel
-	xhost +  
+	xhost +
 
 	docker run -d \
 		--net host \
@@ -256,7 +263,7 @@ kivy-infoscreen(){
 }
 # documents, spreadsheets, and slides
 libreoffice(){
-	xhost + 
+	xhost +
 	del_stopped libreoffice
 
 	docker run -d \
@@ -278,7 +285,7 @@ lynx(){
 # lightweight web brower
 midori(){
 	del_stopped midori
-	xhost +  
+	xhost +
 
 	docker run -d \
 		--net host \
@@ -315,7 +322,7 @@ mpg123(){
 		-v $PWD/audio.mp3:/audio.mp3 \
 		-v $PWD:/audio \
 		--name mpg123 \
-		mitchtech/rpi-mpg123	
+		mitchtech/rpi-mpg123
 }
 # adafruit neopixel leds
 neopixel(){
@@ -355,7 +362,7 @@ nmap(){
 # pdf viewer and presentation tool
 okular(){
 	del_stopped okular
-	xhost +  
+	xhost +
 
 	docker run -d \
 		-e DISPLAY=unix:0 \
@@ -375,7 +382,7 @@ pianobar(){
 		--net host \
 		--device /dev/snd \
 		--name pianobar \
-		mitchtech/rpi-pianobar	
+		mitchtech/rpi-pianobar
 }
 # fm radio transmit pifm(sound_file, frequency)
 pifm(){
@@ -527,7 +534,7 @@ uiautomator(){
 		-v /dev/bus/usb:/dev/bus/usb \
 		-v /etc/localtime:/etc/localtime:ro \
 		--name uiautomator \
-		mitchtech/uiautomator 
+		mitchtech/uiautomator
 }
 # android test automation x windows
 uiautomatorx(){
@@ -541,7 +548,7 @@ uiautomatorx(){
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		-v /etc/localtime:/etc/localtime:ro \
 		--name uiautomator \
-		mitchtech/uiautomator 
+		mitchtech/uiautomator
 }
 # remote access and control
 # vnc(){}
@@ -564,7 +571,18 @@ xeyes(){
 		-e DISPLAY=$DISPLAY \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		--name xeyes \
-		mitchtech/x11-apps 
+		mitchtech/x11-apps
+}
+# sdr base transciever station
+yatebts(){
+	docker run -it --rm \
+		--privileged \
+		--device=/dev/bus/usb \
+		--net host \
+		-v $PWD/ybts.conf:/usr/local/etc/yate/ybts.conf \
+		-v $PWD/subscribers.conf:/usr/local/etc/yate/subscribers.conf \
+		--name yatebts \
+		mitchtech/rpi-bladerf-yatebts
 }
 
 #
