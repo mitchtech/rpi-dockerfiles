@@ -15,8 +15,9 @@ RUN mkdir -m 0750 /.android
 
 #ADD insecure_shared_adbkey /.android/adbkey
 #ADD insecure_shared_adbkey.pub /.android/adbkey.pub
-
-WORKDIR /data
-
+#WORKDIR /data
 #CMD ["adb", "devices"]
-ENTRYPOINT ["bash"]
+#ENTRYPOINT ["bash"]
+# Expose default ADB port
+EXPOSE 5037
+CMD adb -a -P 5037 fork-server server
