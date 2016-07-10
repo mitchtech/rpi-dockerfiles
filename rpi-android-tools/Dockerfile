@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y -q \
     rm -rf /var/lib/apt/lists/*
 
 # Set up insecure default key
-RUN mkdir -m 0750 /.android
-ADD insecure_shared_adbkey /.android/adbkey
-ADD insecure_shared_adbkey.pub /.android/adbkey.pub
+RUN mkdir -m 0750 /root/.android
+ADD insecure_shared_adbkey /root/.android/adbkey
+ADD insecure_shared_adbkey.pub /root/.android/adbkey.pub
 
 # Expose default ADB port
 EXPOSE 5037
