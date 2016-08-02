@@ -10,10 +10,6 @@ RUN apt-get update && apt-get install -y -q \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install uiautomator
-
-VOLUME ["/data"]
-
-WORKDIR /data
+RUN pip install uiautomator influxdb
 
 CMD ["adb", "devices"]
