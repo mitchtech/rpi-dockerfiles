@@ -1,4 +1,4 @@
-FROM mitchtech/rpi-android-tools
+FROM mitchtech/arm-adb
 
 MAINTAINER Michael J. Mitchell <michael@mitchtech.net>
 
