@@ -7,10 +7,9 @@ RUN apt-get update && apt-get install -y -q \
     python-dev \
     python-pip \
     python-virtualenv \
-    boto3 \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install uiautomator influxdb
+RUN pip install uiautomator influxdb boto3
 
 CMD ["adb", "devices"]
