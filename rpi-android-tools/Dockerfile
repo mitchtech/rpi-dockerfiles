@@ -17,4 +17,4 @@ ADD insecure_shared_adbkey.pub /root/.android/adbkey.pub
 
 # Expose default ADB port
 EXPOSE 5037
-CMD adb -a -P 5037 fork-server server
+CMD adb -a -P 5037 server nodaemon
